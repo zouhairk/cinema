@@ -1,0 +1,52 @@
+package com.ibformation.service;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.ibformation.bo.Role;
+import com.ibformation.dao.RoleDao;
+
+@Component
+public class RoleServiceImp implements RoleService {
+
+	@Autowired
+	RoleDao roleDao;
+
+	public RoleServiceImp() {
+
+	}
+
+	public RoleServiceImp(RoleDao roleDao) {
+		this.roleDao = roleDao;
+	}
+
+	@Override
+	public Optional<Role> find(Integer id) throws SQLException {
+		return roleDao.find(id);
+	}
+
+	@Override
+	public List<Role> findAll() throws SQLException {
+		return roleDao.findAll();
+	}
+
+	@Override
+	public boolean save(Role o) throws SQLException {
+		return roleDao.save(o);
+	}
+
+	@Override
+	public boolean update(Role o) throws SQLException {
+		return roleDao.update(o);
+	}
+
+	@Override
+	public boolean delete(Role o) throws SQLException {
+		return roleDao.delete(o);
+	}
+
+}

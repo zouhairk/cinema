@@ -1,0 +1,44 @@
+package com.ibformation.dao;
+
+
+
+import java.util.List;
+import java.util.Optional;
+
+import com.ibformation.bo.Langue;
+
+
+public class LangueDAOImpl implements LangueDAO {
+
+	@Override
+	public Optional<Langue> find(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Langue> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean save(Langue o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean update(Langue o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean delete(Langue o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+ 
+}

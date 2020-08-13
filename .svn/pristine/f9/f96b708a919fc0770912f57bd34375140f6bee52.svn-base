@@ -1,0 +1,99 @@
+package com.ibformation.dao;
+
+import java.sql.SQLException;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.ibformation.bo.Compte;
+
+/**
+ * @Autor Zouhair KASMI
+ */
+@Repository
+public class CompteDaoImp implements CompteDao {
+	@Autowired
+	CompteDao compteDao;
+
+	@Override
+	public <S extends Compte> S save(S compte) {
+		return compteDao.save(compte);
+	}
+
+	@Override
+	public <S extends Compte> Iterable<S> saveAll(Iterable<S> comptes) {
+		return compteDao.saveAll(comptes);
+	}
+
+	@Override
+	public Optional<Compte> findById(Integer id) {
+		return compteDao.findById(id);
+	}
+
+	@Override
+	public boolean existsById(Integer id) {
+		return compteDao.existsById(id);
+	}
+
+	@Override
+	public Iterable<Compte> findAll() {
+		return compteDao.findAll();
+	}
+
+	@Override
+	public Iterable<Compte> findAllById(Iterable<Integer> ids) {
+		return compteDao.findAllById(ids);
+	}
+
+	@Override
+	public long count() {
+
+		return compteDao.count();
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		compteDao.deleteById(id);
+		
+	}
+
+	@Override
+	public void delete(Compte compte) {
+	compteDao.delete(compte);
+		
+	}
+
+	@Override
+	public void deleteAll(Iterable<? extends Compte> comptes) {
+		compteDao.deleteAll(comptes);
+		
+	}
+
+	@Override
+	public void deleteAll() {
+		compteDao.deleteAll();
+		
+	}
+
+	@Override
+	public boolean connexion(Compte c) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deconnexion(Compte c) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean verifierEmail(Compte c) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	 
+
+}

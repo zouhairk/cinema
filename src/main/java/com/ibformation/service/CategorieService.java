@@ -1,0 +1,7 @@
+package com.ibformation.service;
+
+import com.ibformation.bo.Categorie;
+
+public interface CategorieService extends Service<Categorie, Integer> {
+
+}

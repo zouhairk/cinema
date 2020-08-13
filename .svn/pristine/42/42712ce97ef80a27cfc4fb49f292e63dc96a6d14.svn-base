@@ -1,0 +1,10 @@
+package com.ibformation.dao;
+
+
+
+import com.ibformation.bo.Film;
+
+public interface FilmDAO extends Dao<Film, Integer>{
+
+	
+}

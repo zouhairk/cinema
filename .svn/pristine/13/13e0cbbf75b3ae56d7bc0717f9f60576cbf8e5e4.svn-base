@@ -1,0 +1,90 @@
+package com.ibformation.bo;
+ 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+ 
+@Entity
+@Table(name = "salle", catalog = "cinema")
+public class Salle implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6531317452063576290L;
+	private Integer idSalle;
+	private Cinema cinema;
+	private String numeroSalle;
+	private Integer capaciteSalle;
+	private Set<Programmer> programmers = new HashSet<>(0);
+
+	public Salle() {
+	}
+
+	public Salle(Cinema cinema, String numeroSalle, Integer capaciteSalle, Set<Programmer> programmers) {
+		this.cinema = cinema;
+		this.numeroSalle = numeroSalle;
+		this.capaciteSalle = capaciteSalle;
+		this.programmers = programmers;
+	}
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "id_Salle", unique = true, nullable = false)
+	public Integer getIdSalle() {
+		return this.idSalle;
+	}
+
+	public void setIdSalle(Integer idSalle) {
+		this.idSalle = idSalle;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_Cinema")
+	public Cinema getCinema() {
+		return this.cinema;
+	}
+
+	public void setCinema(Cinema cinema) {
+		this.cinema = cinema;
+	}
+
+	@Column(name = "numero_Salle", length = 50)
+	public String getNumeroSalle() {
+		return this.numeroSalle;
+	}
+
+	public void setNumeroSalle(String numeroSalle) {
+		this.numeroSalle = numeroSalle;
+	}
+
+	@Column(name = "capacite_Salle")
+	public Integer getCapaciteSalle() {
+		return this.capaciteSalle;
+	}
+
+	public void setCapaciteSalle(Integer capaciteSalle) {
+		this.capaciteSalle = capaciteSalle;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "salle")
+	public Set<Programmer> getProgrammers() {
+		return this.programmers;
+	}
+
+	public void setProgrammers(Set programmers) {
+		this.programmers = programmers;
+	}
+
+}

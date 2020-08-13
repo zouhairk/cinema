@@ -1,0 +1,152 @@
+package com.ibformation.bo;
+ 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+ 
+@Entity
+@Table(name = "compte", catalog = "cinema")
+public class Compte implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8251193616837371248L;
+	
+	private Integer idCompte;
+	private Adresse adresse;
+	private CarteFid carteFid;
+	private String nomCompte;
+	private String prenomCompte;
+	private String emailCompte;
+	private String motspasseCompte;
+	private Set<Role> roles = new HashSet<>(0);
+	private Set<Reservation> reservations = new HashSet<>(0);
+	private Set<CarteFid> carteFids = new HashSet<>(0);
+
+	public Compte() {
+	}
+
+	public Compte(Adresse adresse, CarteFid carteFid, String nomCompte, String prenomCompte, String emailCompte,
+			String motspasseCompte, Set<Role> roles, Set<Reservation> reservations, Set<CarteFid> carteFids) {
+		this.adresse = adresse;
+		this.carteFid = carteFid;
+		this.nomCompte = nomCompte;
+		this.prenomCompte = prenomCompte;
+		this.emailCompte = emailCompte;
+		this.motspasseCompte = motspasseCompte;
+		this.roles = roles;
+		this.reservations = reservations;
+		this.carteFids = carteFids;
+	}
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "id_Compte", unique = true, nullable = false)
+	public Integer getIdCompte() {
+		return this.idCompte;
+	}
+
+	public void setIdCompte(Integer idCompte) {
+		this.idCompte = idCompte;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_Adresse")
+	public Adresse getAdresse() {
+		return this.adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "carte_fid_id_carte_fid")
+	public CarteFid getCarteFid() {
+		return this.carteFid;
+	}
+
+	public void setCarteFid(CarteFid carteFid) {
+		this.carteFid = carteFid;
+	}
+
+	@Column(name = "nom_Compte", length = 50)
+	public String getNomCompte() {
+		return this.nomCompte;
+	}
+
+	public void setNomCompte(String nomCompte) {
+		this.nomCompte = nomCompte;
+	}
+
+	@Column(name = "prenom_Compte", length = 50)
+	public String getPrenomCompte() {
+		return this.prenomCompte;
+	}
+
+	public void setPrenomCompte(String prenomCompte) {
+		this.prenomCompte = prenomCompte;
+	}
+
+	@Column(name = "email_Compte", length = 100)
+	public String getEmailCompte() {
+		return this.emailCompte;
+	}
+
+	public void setEmailCompte(String emailCompte) {
+		this.emailCompte = emailCompte;
+	}
+
+	@Column(name = "motspasse_Compte", length = 65535)
+	public String getMotspasseCompte() {
+		return this.motspasseCompte;
+	}
+
+	public void setMotspasseCompte(String motspasseCompte) {
+		this.motspasseCompte = motspasseCompte;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "avoir_compte_role", catalog = "cinema", joinColumns = {
+			@JoinColumn(name = "id_Compte", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "id_Role", nullable = false, updatable = false) })
+	public Set<Role> getRoles() {
+		return this.roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compte")
+	public Set<Reservation> getReservations() {
+		return this.reservations;
+	}
+
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compte")
+	public Set<CarteFid> getCarteFids() {
+		return this.carteFids;
+	}
+
+	public void setCarteFids(Set<CarteFid> carteFids) {
+		this.carteFids = carteFids;
+	}
+
+}

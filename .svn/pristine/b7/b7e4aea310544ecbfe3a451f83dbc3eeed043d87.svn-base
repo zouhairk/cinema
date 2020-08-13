@@ -1,0 +1,7 @@
+package com.ibformation.dao;
+
+import com.ibformation.bo.Permission;
+
+public interface PermissionDao extends Dao<Permission, Integer> {
+
+}

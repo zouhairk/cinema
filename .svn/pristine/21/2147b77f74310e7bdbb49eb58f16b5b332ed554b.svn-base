@@ -1,0 +1,50 @@
+package com.ibformation.service;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.ibformation.bo.Cinema;
+import com.ibformation.dao.CinemaDao;
+
+@Component
+public class CinemaServiceImp implements CinemaService {
+	@Autowired
+	private CinemaDao cinemaDao;
+
+	public CinemaServiceImp() {
+ 	}
+
+	public CinemaServiceImp(CinemaDao cinemaDao) {
+		this.cinemaDao = cinemaDao;
+	}
+
+	@Override
+	public Optional<Cinema> find(Integer id) throws SQLException {
+		return cinemaDao.find(id);
+	}
+
+	@Override
+	public List<Cinema> findAll() throws SQLException {
+		return cinemaDao.findAll();
+	}
+
+	@Override
+	public boolean save(Cinema o) throws SQLException {
+		return cinemaDao.save(o);
+	}
+
+	@Override
+	public boolean update(Cinema o) throws SQLException {
+		return cinemaDao.update(o);
+	}
+
+	@Override
+	public boolean delete(Cinema o) throws SQLException {
+		return cinemaDao.delete(o);
+	}
+
+}

@@ -1,0 +1,90 @@
+package com.ibformation.bo;
+ 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+ 
+@Entity
+@Table(name = "cinema", catalog = "cinema")
+public class Cinema implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2746966254887892302L;
+	private Integer idCinema;
+	private Adresse adresse;
+	private String nomCinema;
+	private Set<Salle> salles = new HashSet<>(0);
+	private Set<Adresse> adresses = new HashSet<>(0);
+
+	public Cinema() {
+	}
+
+	public Cinema(Adresse adresse, String nomCinema, Set<Salle> salles, Set<Adresse> adresses) {
+		this.adresse = adresse;
+		this.nomCinema = nomCinema;
+		this.salles = salles;
+		this.adresses = adresses;
+	}
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "id_Cinema", unique = true, nullable = false)
+	public Integer getIdCinema() {
+		return this.idCinema;
+	}
+
+	public void setIdCinema(Integer idCinema) {
+		this.idCinema = idCinema;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "adresse_id_adresse")
+	public Adresse getAdresse() {
+		return this.adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+	@Column(name = "nom_Cinema", length = 100)
+	public String getNomCinema() {
+		return this.nomCinema;
+	}
+
+	public void setNomCinema(String nomCinema) {
+		this.nomCinema = nomCinema;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cinema")
+	public Set<Salle> getSalles() {
+		return this.salles;
+	}
+
+	public void setSalles(Set<Salle> salles) {
+		this.salles = salles;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cinema")
+	public Set<Adresse> getAdresses() {
+		return this.adresses;
+	}
+
+	public void setAdresses(Set<Adresse> adresses) {
+		this.adresses = adresses;
+	}
+
+}

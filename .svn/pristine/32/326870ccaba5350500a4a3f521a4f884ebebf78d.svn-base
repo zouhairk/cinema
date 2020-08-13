@@ -1,0 +1,50 @@
+package com.ibformation.service;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.ibformation.bo.Permission;
+import com.ibformation.dao.PermissionDao;
+
+@Component
+public class PermissionServiceImp implements PermissionService {
+	@Autowired
+	PermissionDao permDao;
+
+	public PermissionServiceImp() {
+	}
+
+	public PermissionServiceImp(PermissionDao permDao) {
+		this.permDao = permDao;
+	}
+
+	@Override
+	public Optional<Permission> find(Integer id) throws SQLException {
+		return permDao.find(id);
+	}
+
+	@Override
+	public List<Permission> findAll() throws SQLException {
+		return permDao.findAll();
+	}
+
+	@Override
+	public boolean save(Permission o) throws SQLException {
+		return permDao.save(o);
+	}
+
+	@Override
+	public boolean update(Permission o) throws SQLException {
+		return permDao.update(o);
+	}
+
+	@Override
+	public boolean delete(Permission o) throws SQLException {
+		return permDao.delete(o);
+	}
+
+}

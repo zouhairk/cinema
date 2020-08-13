@@ -1,0 +1,10 @@
+package com.ibformation.dao;
+
+
+
+import com.ibformation.bo.Categorie;
+
+public interface CategorieDAO extends Dao<Categorie, Integer>{
+
+	
+}

@@ -1,0 +1,76 @@
+package com.ibformation.bo;
+// Generated 24 juil. 2020 11:44:02 by Hibernate Tools 5.1.10.Final
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+ 
+@Entity
+@Table(name = "programmer", catalog = "cinema")
+public class Programmer implements java.io.Serializable {
+
+	private ProgrammerId id;
+	private Film film;
+	private Salle salle;
+	private Seance seance;
+
+	public Programmer() {
+	}
+
+	public Programmer(ProgrammerId id, Film film, Salle salle, Seance seance) {
+		this.id = id;
+		this.film = film;
+		this.salle = salle;
+		this.seance = seance;
+	}
+
+	@EmbeddedId
+
+	@AttributeOverrides({ @AttributeOverride(name = "idFilm", column = @Column(name = "id_Film", nullable = false)),
+			@AttributeOverride(name = "idSeance", column = @Column(name = "id_Seance", nullable = false)),
+			@AttributeOverride(name = "idSalle", column = @Column(name = "id_Salle", nullable = false)) })
+	public ProgrammerId getId() {
+		return this.id;
+	}
+
+	public void setId(ProgrammerId id) {
+		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_Film", nullable = false, insertable = false, updatable = false)
+	public Film getFilm() {
+		return this.film;
+	}
+
+	public void setFilm(Film film) {
+		this.film = film;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_Salle", nullable = false, insertable = false, updatable = false)
+	public Salle getSalle() {
+		return this.salle;
+	}
+
+	public void setSalle(Salle salle) {
+		this.salle = salle;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_Seance", nullable = false, insertable = false, updatable = false)
+	public Seance getSeance() {
+		return this.seance;
+	}
+
+	public void setSeance(Seance seance) {
+		this.seance = seance;
+	}
+
+}

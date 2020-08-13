@@ -1,0 +1,53 @@
+package com.ibformation.dao;
+
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+
+import com.ibformation.bo.Categorie;
+
+@Repository
+public class CategorieDAOImpl implements CategorieDAO {
+
+	
+	@PersistenceContext
+	private EntityManager entityManger;
+	
+	
+	
+	@Override
+	public Optional<Categorie> find(Integer id) {
+ 		return Optional.of(entityManger.find(Categorie.class, id));
+	}
+
+	@Override
+	public List<Categorie> findAll() {
+ 		List<Categorie> resultList= (List<Categorie>) entityManger.createQuery("from Categorie").getResultList();
+ 		return resultList;
+	}
+
+	@Override
+	public boolean save(Categorie o) {
+ 		  entityManger.persist(o);
+ 		  return false;
+	}
+
+	@Override
+	public boolean update(Categorie o) {
+		entityManger.merge(o);
+ 		return false;
+	}
+
+	@Override
+	public boolean delete(Categorie o) {
+ 		  entityManger.remove(o);
+ 		  return false;
+	}
+
+
+}

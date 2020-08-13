@@ -1,0 +1,139 @@
+package com.ibformation.bo;
+ 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+ 
+@Entity
+@Table(name = "film", catalog = "cinema")
+public class Film implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8563835883288827958L;
+	
+	private Integer idFilm;
+	private String nomFilm;
+	private Integer dureeFilm;
+	private Date dateSortieRealiser;
+	private Set<Programmer> programmers = new HashSet<>(0);
+	private Set<Langue> langues = new HashSet<>(0);
+	private Set<Realisateur> realisateurs = new HashSet<>(0);
+	private Set<Categorie> categories = new HashSet<>(0);
+
+	public Film() {
+	}
+
+	public Film(Date dateSortieRealiser) {
+		this.dateSortieRealiser = dateSortieRealiser;
+	}
+
+	public Film(String nomFilm, Integer dureeFilm, Date dateSortieRealiser, Set<Programmer> programmers, Set<Langue> langues,
+			Set<Realisateur> realisateurs, Set<Categorie> categories) {
+		this.nomFilm = nomFilm;
+		this.dureeFilm = dureeFilm;
+		this.dateSortieRealiser = dateSortieRealiser;
+		this.programmers = programmers;
+		this.langues = langues;
+		this.realisateurs = realisateurs;
+		this.categories = categories;
+	}
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "id_Film", unique = true, nullable = false)
+	public Integer getIdFilm() {
+		return this.idFilm;
+	}
+
+	public void setIdFilm(Integer idFilm) {
+		this.idFilm = idFilm;
+	}
+
+	@Column(name = "nom_Film", length = 100)
+	public String getNomFilm() {
+		return this.nomFilm;
+	}
+
+	public void setNomFilm(String nomFilm) {
+		this.nomFilm = nomFilm;
+	}
+
+	@Column(name = "duree_Film")
+	public Integer getDureeFilm() {
+		return this.dureeFilm;
+	}
+
+	public void setDureeFilm(Integer dureeFilm) {
+		this.dureeFilm = dureeFilm;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date_sortie_realiser", nullable = false, length = 19)
+	public Date getDateSortieRealiser() {
+		return this.dateSortieRealiser;
+	}
+
+	public void setDateSortieRealiser(Date dateSortieRealiser) {
+		this.dateSortieRealiser = dateSortieRealiser;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "film")
+	public Set<Programmer> getProgrammers() {
+		return this.programmers;
+	}
+
+	public void setProgrammers(Set<Programmer> programmers) {
+		this.programmers = programmers;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "films")
+	public Set<Langue> getLangues() {
+		return this.langues;
+	}
+
+	public void setLangues(Set langues) {
+		this.langues = langues;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "realiser", catalog = "cinema", joinColumns = {
+			@JoinColumn(name = "id_Film", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "id_Auteur", nullable = false, updatable = false) })
+	public Set<Realisateur> getRealisateurs() {
+		return this.realisateurs;
+	}
+
+	public void setRealisateurs(Set<Realisateur> realisateurs) {
+		this.realisateurs = realisateurs;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "appartenir_film_categorie", catalog = "cinema", joinColumns = {
+			@JoinColumn(name = "id_Film", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "id_Categorie", nullable = false, updatable = false) })
+	public Set<Categorie> getCategories() {
+		return this.categories;
+	}
+
+	public void setCategories(Set<Categorie> categories) {
+		this.categories = categories;
+	}
+
+}

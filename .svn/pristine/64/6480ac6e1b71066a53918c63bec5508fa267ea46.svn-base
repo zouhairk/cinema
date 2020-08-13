@@ -1,0 +1,8 @@
+package com.ibformation.dao;
+
+import com.ibformation.bo.Realisateur;
+
+public interface RealisateurDAO extends Dao<Realisateur, Integer>{
+
+	
+}

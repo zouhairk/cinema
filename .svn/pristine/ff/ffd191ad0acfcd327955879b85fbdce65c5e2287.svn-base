@@ -1,0 +1,70 @@
+package com.ibformation.service;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.ibformation.bo.Compte;
+import com.ibformation.dao.CompteDao;
+
+@Component
+public class CompteServiceImp implements CompteService {
+	
+	@Autowired
+	private CompteDao compteDao;
+
+	public CompteServiceImp() {
+	}
+
+	public CompteServiceImp(CompteDao compteDao) {
+		this.compteDao = compteDao;
+	}
+
+	public void setCompteDao(CompteDao compteDao) {
+		this.compteDao = compteDao;
+	}
+
+	@Override
+	public Optional<Compte> find(Integer id) throws SQLException {
+		return compteDao.find(id);
+	}
+
+	@Override
+	public List<Compte> findAll() throws SQLException {
+		return compteDao.findAll();
+	}
+
+	@Override
+	public boolean save(Compte o) throws SQLException {
+		return compteDao.save(o);
+	}
+
+	@Override
+	public boolean update(Compte o) throws SQLException {
+		return compteDao.update(o);
+	}
+
+	@Override
+	public boolean delete(Compte o) throws SQLException {
+		return compteDao.delete(o);
+	}
+
+	@Override
+	public boolean connexion(Compte c) throws SQLException {
+		return compteDao.connexion(c);
+	}
+
+	@Override
+	public boolean deconnexion(Compte c) throws SQLException {
+		return compteDao.deconnexion(c);
+	}
+
+	@Override
+	public boolean verifierEmail(Compte c) throws SQLException {
+		return compteDao.verifierEmail(c);
+	}
+
+}

@@ -1,0 +1,50 @@
+package com.ibformation.service;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.ibformation.bo.Film;
+import com.ibformation.dao.FilmDAO;
+
+@Component
+public class FilmServiceImpl implements FilmService {
+
+	@Autowired
+	private FilmDAO filmDao;
+
+	public FilmServiceImpl() {
+	}
+
+	public void setFilmDao(FilmDAO filmDao) {
+		this.filmDao = filmDao;
+	}
+
+	@Override
+	public Optional<Film> find(Integer id) throws SQLException {
+		return filmDao.find(id);
+	}
+
+	@Override
+	public List<Film> findAll() throws SQLException {
+		return filmDao.findAll();
+	}
+
+	@Override
+	public boolean save(Film f) throws SQLException {
+		return filmDao.save(f);
+	}
+
+	@Override
+	public boolean update(Film f) throws SQLException {
+		return filmDao.update(f);
+	}
+
+	@Override
+	public boolean delete(Film f) throws SQLException {
+		return filmDao.delete(f);
+	}
+}

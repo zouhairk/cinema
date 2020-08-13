@@ -1,0 +1,90 @@
+package com.ibformation.bo;
+ 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+ 
+@Entity
+@Table(name = "permission", catalog = "cinema")
+public class Permission implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -371428942173735999L;
+	
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	private Integer idPermission;
+	private String libellePermission;
+	private String attributPermission;
+	private Boolean valeurPermission;
+	private Set<Role> roles = new HashSet<>(0);
+
+	public Permission() {
+	}
+
+	public Permission(String libellePermission, String attributPermission, Boolean valeurPermission, Set<Role> roles) {
+		this.libellePermission = libellePermission;
+		this.attributPermission = attributPermission;
+		this.valeurPermission = valeurPermission;
+		this.roles = roles;
+	}
+
+ 
+	@Column(name = "id_Permission", unique = true, nullable = false)
+	public Integer getIdPermission() {
+		return this.idPermission;
+	}
+
+	public void setIdPermission(Integer idPermission) {
+		this.idPermission = idPermission;
+	}
+
+	@Column(name = "libelle_Permission", length = 65535)
+	public String getLibellePermission() {
+		return this.libellePermission;
+	}
+
+	public void setLibellePermission(String libellePermission) {
+		this.libellePermission = libellePermission;
+	}
+
+	@Column(name = "attribut_Permission", length = 30)
+	public String getAttributPermission() {
+		return this.attributPermission;
+	}
+
+	public void setAttributPermission(String attributPermission) {
+		this.attributPermission = attributPermission;
+	}
+
+	@Column(name = "valeur_Permission")
+	public Boolean getValeurPermission() {
+		return this.valeurPermission;
+	}
+
+	public void setValeurPermission(Boolean valeurPermission) {
+		this.valeurPermission = valeurPermission;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "permissions")
+	public Set<Role> getRoles() {
+		return this.roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+}
