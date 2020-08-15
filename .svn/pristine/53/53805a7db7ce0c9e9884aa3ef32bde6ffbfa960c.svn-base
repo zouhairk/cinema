@@ -1,7 +1,0 @@
-package com.ibformation.dao;
-
-import com.ibformation.bo.Seance;
-
-public interface SeanceDao extends Dao<Seance, Integer> {
-
-}

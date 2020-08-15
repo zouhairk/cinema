@@ -1,9 +1,0 @@
-package com.ibformation.dao;
-
-
-import com.ibformation.bo.Langue;
-
-public interface LangueDAO extends Dao<Langue, Integer>{
-
-	
-}

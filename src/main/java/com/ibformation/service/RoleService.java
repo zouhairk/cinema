@@ -1,7 +1,0 @@
-package com.ibformation.service;
-
-import com.ibformation.bo.Role;
-
-public interface RoleService extends Service<Role, Integer>{
-
-}

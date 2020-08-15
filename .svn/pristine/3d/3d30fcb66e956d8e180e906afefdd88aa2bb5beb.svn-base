@@ -1,7 +1,0 @@
-package com.ibformation.dao;
-
-import com.ibformation.bo.Role;
-
-public interface RoleDao extends Dao<Role, Integer> {
-
-}

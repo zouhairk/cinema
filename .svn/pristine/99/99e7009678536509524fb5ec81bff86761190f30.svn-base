@@ -1,7 +1,0 @@
-package com.ibformation.dao;
-
-import com.ibformation.bo.Cinema;
-
-public interface CinemaDao extends Dao<Cinema, Integer> {
-
-}

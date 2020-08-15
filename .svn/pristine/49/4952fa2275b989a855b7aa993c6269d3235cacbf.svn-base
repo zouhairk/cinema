@@ -1,7 +1,0 @@
-package com.ibformation.dao;
-
-import com.ibformation.bo.Salle;
-
-public interface SalleDao extends Dao<Salle, Integer> {
-
-}

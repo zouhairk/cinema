@@ -1,7 +1,0 @@
-package com.ibformation.dao;
-
-import com.ibformation.bo.CarteFid;
-
-public interface CarteFideliteDao extends Dao<CarteFid, Integer> {
-
-}
