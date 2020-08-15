@@ -24,6 +24,11 @@ import lombok.NoArgsConstructor;
 public class Langue implements java.io.Serializable {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5347295049585028468L;
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id_Langue", unique = true, nullable = false)

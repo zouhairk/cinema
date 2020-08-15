@@ -20,6 +20,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Programmer implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5262028383309093372L;
+
 	@EmbeddedId
 	@AttributeOverrides({ @AttributeOverride(name = "idFilm", column = @Column(name = "id_Film", nullable = false)),
 		@AttributeOverride(name = "idSeance", column = @Column(name = "id_Seance", nullable = false)),

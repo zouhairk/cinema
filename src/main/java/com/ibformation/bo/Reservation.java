@@ -10,23 +10,36 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
  
 @Entity
 @Table(name = "reservation", catalog = "cinema")
+@Data
+@NoArgsConstructor
 public class Reservation implements java.io.Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2229003723825591084L;
-	
-	private ReservationId id;
-	private Compte compte;
-	private Programmer programmer;
-	private Integer nombrePlaceReserverReservation;
+	private static final long serialVersionUID = 4119872939176200152L;
 
-	public Reservation() {
-	}
+	@EmbeddedId
+	@AttributeOverrides({ @AttributeOverride(name = "idCompte", column = @Column(name = "id_Compte", nullable = false)),
+		@AttributeOverride(name = "idSeance", column = @Column(name = "id_Seance", nullable = false)) })
+	private ReservationId id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_Compte", nullable = false, insertable = false, updatable = false)
+	private Compte compte;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_Seance", nullable = false, insertable = false, updatable = false)
+	private Seance seance;
+
+	@Column(name = "nombre_place_reserver_Reservation")
+	private Integer nombrePlaceReserverReservation;
 
 	public Reservation(ReservationId id, Compte compte, Seance seance) {
 		this.id = id;
@@ -38,47 +51,6 @@ public class Reservation implements java.io.Serializable {
 		this.id = id;
 		this.compte = compte;
 		this.seance = seance;
-		this.nombrePlaceReserverReservation = nombrePlaceReserverReservation;
-	}
-
-	@EmbeddedId
-
-	@AttributeOverrides({ @AttributeOverride(name = "idCompte", column = @Column(name = "id_Compte", nullable = false)),
-			@AttributeOverride(name = "idSeance", column = @Column(name = "id_Seance", nullable = false)) })
-	public ReservationId getId() {
-		return this.id;
-	}
-
-	public void setId(ReservationId id) {
-		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_Compte", nullable = false, insertable = false, updatable = false)
-	public Compte getCompte() {
-		return this.compte;
-	}
-
-	public void setCompte(Compte compte) {
-		this.compte = compte;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_Programmer", nullable = false, insertable = false, updatable = false)
-	public Seance getSeance() {
-		return this.seance;
-	}
-
-	public void setSeance(Seance seance) {
-		this.seance = seance;
-	}
-
-	@Column(name = "nombre_place_reserver_Reservation")
-	public Integer getNombrePlaceReserverReservation() {
-		return this.nombrePlaceReserverReservation;
-	}
-
-	public void setNombrePlaceReserverReservation(Integer nombrePlaceReserverReservation) {
 		this.nombrePlaceReserverReservation = nombrePlaceReserverReservation;
 	}
 

@@ -29,6 +29,11 @@ public class Cinema implements java.io.Serializable {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = -2223284257983470551L;
+	
+	/**
+	 * 
+	 */
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(unique = true, nullable = false)

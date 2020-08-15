@@ -44,7 +44,7 @@ public class Realisateur implements java.io.Serializable {
 	private Date dateNaissanceAuteur;
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "realisateurs")
-	private Set<Film> films = new HashSet(0);
+	private Set<Film> films = new HashSet<>(0);
 
 	public Realisateur(Date dateNaissanceAuteur) {
 		this.dateNaissanceAuteur = dateNaissanceAuteur;
